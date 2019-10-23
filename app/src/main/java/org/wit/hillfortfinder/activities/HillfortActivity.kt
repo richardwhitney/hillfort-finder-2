@@ -24,25 +24,33 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarAdd)
         app = application as MainApp
 
+        var edit = false
+
         if (intent.hasExtra("hillfort_edit")) {
+            edit = true
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             hillfortDescription.setText(hillfort.description)
+            btnAdd.setText(R.string.save_hillfort)
         }
 
         btnAdd.setOnClickListener {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = hillfortDescription.text.toString()
-            if (hillfort.title.isNotEmpty()) {
-                app.hillforts.create(hillfort.copy())
-                info("Add Button Pressed: $hillfort")
-                app.hillforts.logAll()
-                setResult(AppCompatActivity.RESULT_OK)
-                finish()
+            if (hillfort.title.isEmpty()) {
+                toast(R.string.enter_hillfort_title)
             }
             else {
-                toast("Please Enter A Title")
+                if (edit) {
+                    app.hillforts.update(hillfort.copy())
+                }
+                else {
+                    app.hillforts.create(hillfort.copy())
+                }
             }
+            info("Add Button Pressed: $hillfortTitle")
+            setResult(AppCompatActivity.RESULT_OK)
+            finish()
         }
     }
 
@@ -51,7 +59,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
             R.id.item_cancel -> {
                 finish()

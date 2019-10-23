@@ -13,8 +13,8 @@ class MainApp: Application(), AnkoLogger {
     override fun onCreate() {
         super.onCreate()
         info("Hillfort Finder started")
-        hillforts.create(HillfortModel("One", "About one..."))
-        hillforts.create(HillfortModel("Two", "About two..."))
-        hillforts.create(HillfortModel("Three", "About three..."))
+        hillforts.create(HillfortModel(0,"One", "About one..."))
+        hillforts.create(HillfortModel(1,"Two", "About two..."))
+        hillforts.create(HillfortModel(2,"Three", "About three..."))
     }
 }
