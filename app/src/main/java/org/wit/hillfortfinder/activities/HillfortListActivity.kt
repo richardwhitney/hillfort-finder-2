@@ -5,11 +5,13 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.main.MainApp
+import org.wit.hillfortfinder.models.HillfortModel
 
-class HillfortListActivity: AppCompatActivity() {
+class HillfortListActivity: AppCompatActivity(), HillfortListener {
 
     lateinit var app: MainApp
 
@@ -23,7 +25,7 @@ class HillfortListActivity: AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = HillfortAdapter(app.hillforts)
+        recyclerView.adapter = HillfortAdapter(app.hillforts.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -36,5 +38,9 @@ class HillfortListActivity: AppCompatActivity() {
             R.id.item_add -> startActivityForResult<HillfortActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onHillfortClick(hillfort: HillfortModel) {
+        startActivityForResult(intentFor<HillfortActivity>(), 0)
     }
 }

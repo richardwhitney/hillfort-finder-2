@@ -28,11 +28,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = hillfortDescription.text.toString()
             if (hillfort.title.isNotEmpty()) {
-                app.hillforts.add(hillfort.copy())
+                app.hillforts.create(hillfort.copy())
                 info("Add Button Pressed: $hillfort")
-                for (i in app.hillforts.indices) {
-                    info("Hillfort[$i]: ${app.hillforts[i]}")
-                }
+                app.hillforts.logAll()
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }
