@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.toast
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.helpers.readImage
@@ -38,6 +39,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortDescription.setText(hillfort.description)
             btnAdd.setText(R.string.save_hillfort)
             hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+            if (hillfort.image != null) {
+                chooseImage.setText(R.string.change_hillfort_image)
+            }
         }
 
         btnAdd.setOnClickListener {
@@ -62,6 +66,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         chooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
         }
+
+        hillfortLocation.setOnClickListener {
+            startActivity(intentFor<MapActivity>())
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -85,6 +93,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     hillfort.image = data.getData().toString()
                     hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                    chooseImage.setText(R.string.change_hillfort_image)
                 }
             }
         }
