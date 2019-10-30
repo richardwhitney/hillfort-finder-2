@@ -41,6 +41,9 @@
         </activity>
         <activity android:name=".activities.LoginActivity">
         </activity>
+        <activity android:name=".activities.SignupActivity"
+            android:parentActivityName=".activities.LoginActivity">
+        </activity>
     </application>
 
 </manifest>
