@@ -5,6 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageView
+import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -40,9 +43,21 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortTitle.setText(hillfort.title)
             hillfortDescription.setText(hillfort.description)
             btnAdd.setText(R.string.save_hillfort)
-            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
-            if (hillfort.image != null) {
-                chooseImage.setText(R.string.change_hillfort_image)
+            if (hillfort.images.size > 0) {
+                for (image in hillfort.images) {
+                    val imageView: ImageView = ImageView(this)
+                    var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
+                        600,
+                        600
+                    )
+                    params.setMargins(0, 0, 10, 0)
+                    imageView.layoutParams = params
+                    imageView.setImageBitmap(readImageFromPath(this, image))
+                    imageGallery.addView(imageView)
+                }
+                if (hillfort.images[0] != null) {
+                    chooseImage.setText(R.string.change_hillfort_image)
+                }
             }
         }
 
@@ -103,8 +118,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    hillfort.image = data.getData().toString()
-                    hillfortImage.setImageBitmap(readImage(this, resultCode, data))
+                    hillfort.images.add(data.getData().toString())
+                    //hillfortImage.setImageBitmap(readImage(this, resultCode, data))
                     chooseImage.setText(R.string.change_hillfort_image)
                 }
             }
@@ -118,4 +133,5 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
         }
     }
+
 }
