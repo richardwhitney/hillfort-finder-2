@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.main.MainApp
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.toast
 
 class LoginActivity: AppCompatActivity() {
 
@@ -18,11 +19,28 @@ class LoginActivity: AppCompatActivity() {
         setContentView(R.layout.activity_login)
         app = application as MainApp
 
-        toolbarLogin.title = title
+        toolbarLogin.title = "Login"
         setSupportActionBar(toolbarLogin)
 
+
+
         login.setOnClickListener {
-            startActivityForResult<HillfortListActivity>(0)
+            var email: String = loginEmail.text.toString()
+            var password: String = loginPassword.text.toString()
+            if (email.isNotEmpty() && password.isNotEmpty()) {
+                var user = app.users.loign(email, password)
+                if (user != null) {
+                    app.currentUser = user
+                    startActivityForResult<HillfortListActivity>(0)
+                }
+                else {
+                    toast("Email or password entered was incorrect")
+                }
+            }
+            else {
+                toast("Email and password are required")
+            }
+
         }
     }
 
