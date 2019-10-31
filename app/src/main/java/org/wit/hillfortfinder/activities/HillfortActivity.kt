@@ -27,6 +27,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,8 +36,6 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         setSupportActionBar(toolbarAdd)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         app = application as MainApp
-
-        var edit = false
 
         if (intent.hasExtra("hillfort_edit")) {
             edit = true
@@ -60,6 +59,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                     chooseImage.setText(R.string.change_hillfort_image)
                 }
             }
+        }
+        else {
+            edit = false
         }
 
         btnAdd.setOnClickListener {
@@ -98,6 +100,8 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_hillfort, menu)
+        var deleteItem: MenuItem = menu?.findItem(R.id.item_delete)!!
+        deleteItem.isVisible = edit
         return super.onCreateOptionsMenu(menu)
     }
 
