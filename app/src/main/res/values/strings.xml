@@ -18,4 +18,6 @@
     <string name="button_login">Login</string>
     <string name="button_signup">Signup</string>
     <string name="menu_signup">Signup</string>
+    <string name="button_settins">Update</string>
+    <string name="menu_settings">Settings</string>
 </resources>

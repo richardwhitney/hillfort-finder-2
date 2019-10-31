@@ -5,6 +5,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.wit.hillfortfinder.helpers.exists
 import org.wit.hillfortfinder.helpers.read
 import org.wit.hillfortfinder.helpers.write
@@ -44,7 +45,25 @@ class UserJSONStore: UserStore, AnkoLogger {
     override fun loign(email: String, password: String): UserModel? {
         var foundUser: UserModel? = users.find { p -> p.email == email }
         if (foundUser?.password == password) {
+            logAll()
             return foundUser
+        }
+        else {
+            return null
+        }
+    }
+
+    override fun update(user: UserModel): UserModel? {
+        var foundUser: UserModel? = users.find { p -> p.id == user.id }
+        if (foundUser != null) {
+            var emailExists = users.any { p -> p.email == user.email }
+            if (!emailExists) {
+                foundUser.email = user.email
+                foundUser.password = user.password
+                serialize()
+                return foundUser
+            }
+            return null
         }
         else {
             return null
@@ -59,5 +78,9 @@ class UserJSONStore: UserStore, AnkoLogger {
     private fun deserialize() {
         val jsonString = read(context, UJSON_FILE)
         users = Gson().fromJson(jsonString, uListType)
+    }
+
+    fun logAll() {
+        users.forEach { info("$it") }
     }
 }

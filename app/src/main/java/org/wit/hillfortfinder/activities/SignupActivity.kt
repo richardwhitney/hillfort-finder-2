@@ -28,12 +28,12 @@ class SignupActivity: AppCompatActivity() {
             user.email = signupEmail.text.toString()
             user.password = signupPassword.text.toString()
             if (user.email.isNotEmpty() && user.password.isNotEmpty()) {
-                if (app.users.signup(user)) {
+                if (app.users.signup(user.copy())) {
                     app.currentUser = user
                     startActivityForResult<HillfortListActivity>(0)
                 }
                 else {
-                    toast("A user with this email already exists")
+                    toast("Email is already registered")
                 }
             }
             else {

@@ -44,6 +44,9 @@
         <activity android:name=".activities.SignupActivity"
             android:parentActivityName=".activities.LoginActivity">
         </activity>
+        <activity android:name=".activities.SettingsActivity"
+            android:parentActivityName=".activities.HillfortListActivity">
+        </activity>
     </application>
 
 </manifest>
