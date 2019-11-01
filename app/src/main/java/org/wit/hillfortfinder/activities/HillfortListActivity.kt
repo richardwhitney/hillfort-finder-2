@@ -52,7 +52,7 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener {
     }
 
     private fun loadHillforts() {
-        showHillforts(app.hillforts.findAll())
+        showHillforts(app.hillforts.findByUserId(app.currentUser?.id!!))
     }
 
     fun showHillforts(hillforts: List<HillfortModel>) {

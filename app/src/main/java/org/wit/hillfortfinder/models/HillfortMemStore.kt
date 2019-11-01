@@ -18,6 +18,10 @@ class HillfortMemStore: HillfortStore, AnkoLogger {
         return hillforts
     }
 
+    override fun findByUserId(id: Long): List<HillfortModel> {
+        return hillforts.filter { p -> p.userId == id }
+    }
+
     override fun create(hillfort: HillfortModel) {
         hillfort.id = getId()
         hillforts.add(hillfort)
