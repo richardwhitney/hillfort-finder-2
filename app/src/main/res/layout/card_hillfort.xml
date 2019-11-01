@@ -35,6 +35,13 @@
             android:layout_below="@+id/hillfortTitle"
             android:layout_toEndOf="@+id/imageIcon"/>
 
+        <ImageView
+            android:id="@+id/imageVisited"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_below="@+id/hillfortDescription"
+            android:layout_toEndOf="@id/imageIcon"/>
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

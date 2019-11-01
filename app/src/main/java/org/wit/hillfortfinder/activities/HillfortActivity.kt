@@ -42,6 +42,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
             hillfortDescription.setText(hillfort.description)
+            hillfortVisited.isChecked = hillfort.visited
             btnAdd.setText(R.string.save_hillfort)
             if (hillfort.images.size > 0) {
                 for (image in hillfort.images) {
@@ -81,6 +82,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             info("Add Button Pressed: $hillfortTitle")
             setResult(AppCompatActivity.RESULT_OK)
             finish()
+        }
+
+        hillfortVisited.setOnClickListener {
+            hillfort.visited = hillfortVisited.isChecked
         }
 
         chooseImage.setOnClickListener {

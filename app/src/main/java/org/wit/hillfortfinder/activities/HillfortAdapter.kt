@@ -42,6 +42,9 @@ class HillfortAdapter constructor(
         fun bind(hillfort: HillfortModel, listener: HillfortListener) {
             itemView.hillfortTitle.text = hillfort.title
             itemView.hillfortDescription.text = hillfort.description
+            if (hillfort.visited) {
+                itemView.imageVisited.setImageResource(R.drawable.ic_checked)
+            }
             if (hillfort.images.size > 0) {
                 itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, hillfort.images?.getOrNull(0)!!))
             }
