@@ -20,6 +20,8 @@ import org.wit.hillfortfinder.helpers.showImagePicker
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.models.Location
+import java.text.SimpleDateFormat
+import java.util.*
 
 class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
@@ -43,6 +45,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortTitle.setText(hillfort.title)
             hillfortDescription.setText(hillfort.description)
             hillfortVisited.isChecked = hillfort.visited
+            dateVisited.setText(hillfort.dateVisited)
             addtionalNotes.setText(hillfort.additionalNotes)
             btnAdd.setText(R.string.save_hillfort)
             if (hillfort.images.size > 0) {
@@ -70,6 +73,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = hillfortDescription.text.toString()
             hillfort.additionalNotes = addtionalNotes.text.toString()
+            hillfort.dateVisited = dateVisited.text.toString()
             hillfort.userId = app.currentUser?.id!!
             if (hillfort.title.isEmpty()) {
                 toast(R.string.enter_hillfort_title)
@@ -89,6 +93,15 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         hillfortVisited.setOnClickListener {
             hillfort.visited = hillfortVisited.isChecked
+            if(hillfort.visited) {
+                val currentDate: Date = Calendar.getInstance().time
+                val dateFormat: SimpleDateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+                val formattedDate: String = dateFormat.format(currentDate)
+                dateVisited.setText(formattedDate)
+            }
+            else {
+                dateVisited.setText("")
+            }
         }
 
         chooseImage.setOnClickListener {
