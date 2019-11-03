@@ -22,4 +22,6 @@
     <string name="menu_settings">Settings</string>
     <string name="chk_visited">Visited</string>
     <string name="menu_logout">Logout</string>
+    <string name="hillfort_total">Total number of hillforts:</string>
+    <string name="hillfort_total_visited">Total number of hillforts visited:</string>
 </resources>

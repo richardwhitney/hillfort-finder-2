@@ -75,6 +75,26 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"/>
 
+            <TextView
+                android:id="@+id/totalHillforts"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:text="@string/hillfort_total"/>
+
+            <TextView
+                android:id="@+id/totalHillfortsVisited"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
+                android:text="@string/hillfort_total_visited"/>
+
         </LinearLayout>
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

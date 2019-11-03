@@ -13,6 +13,7 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
+import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.models.UserModel
 
 class SettingsActivity: AppCompatActivity(), AnkoLogger {
@@ -32,6 +33,9 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
         settingsPassword.setText(app.currentUser?.password)
 
         info("Current user: ${app.currentUser}")
+
+        totalHillforts.setText("Total number of hillforts: ${getTotalHillforts()}")
+        totalHillfortsVisited.setText("Total number of hillforts visited: ${getTotalHillfortsVisited()}")
 
         btnSettings.setOnClickListener {
             info("Update Settings button pressed")
@@ -70,5 +74,14 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun getTotalHillforts(): Int {
+        return app.hillforts.findByUserId(app.currentUser?.id!!).size
+    }
+
+    private fun getTotalHillfortsVisited(): Int {
+        var totalHillforts: List<HillfortModel> = app.hillforts.findByUserId(app.currentUser?.id!!)
+        return totalHillforts.filter { p -> p.visited }.size
     }
 }
