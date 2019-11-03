@@ -75,6 +75,19 @@
                     android:padding="8dp"
                     android:text="@string/chk_visited"/>
 
+                <EditText
+                    android:id="@+id/addtionalNotes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:hint="@string/hint_additional_notes"
+                    android:inputType="textMultiLine"
+                    android:maxLength="400"
+                    android:maxLines="10"
+                    android:padding="8dp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="14sp"/>
+
                 <Button
                     android:id="@+id/chooseImage"
                     android:layout_width="match_parent"

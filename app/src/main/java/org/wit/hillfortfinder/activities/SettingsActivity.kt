@@ -34,8 +34,8 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
 
         info("Current user: ${app.currentUser}")
 
-        totalHillforts.setText("Total number of hillforts: ${getTotalHillforts()}")
-        totalHillfortsVisited.setText("Total number of hillforts visited: ${getTotalHillfortsVisited()}")
+        totalHillforts.text = "Total number of hillforts: ${getTotalHillforts()}"
+        totalHillfortsVisited.text = "Total number of hillforts visited: ${getTotalHillfortsVisited()}"
 
         btnSettings.setOnClickListener {
             info("Update Settings button pressed")

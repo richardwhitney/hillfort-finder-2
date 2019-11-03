@@ -43,6 +43,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             hillfortTitle.setText(hillfort.title)
             hillfortDescription.setText(hillfort.description)
             hillfortVisited.isChecked = hillfort.visited
+            addtionalNotes.setText(hillfort.additionalNotes)
             btnAdd.setText(R.string.save_hillfort)
             if (hillfort.images.size > 0) {
                 for (image in hillfort.images) {
@@ -68,6 +69,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         btnAdd.setOnClickListener {
             hillfort.title = hillfortTitle.text.toString()
             hillfort.description = hillfortDescription.text.toString()
+            hillfort.additionalNotes = addtionalNotes.text.toString()
             hillfort.userId = app.currentUser?.id!!
             if (hillfort.title.isEmpty()) {
                 toast(R.string.enter_hillfort_title)

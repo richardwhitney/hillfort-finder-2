@@ -24,4 +24,5 @@
     <string name="menu_logout">Logout</string>
     <string name="hillfort_total">Total number of hillforts:</string>
     <string name="hillfort_total_visited">Total number of hillforts visited:</string>
+    <string name="hint_additional_notes">Additional Notes</string>
 </resources>
