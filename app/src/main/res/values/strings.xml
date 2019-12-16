@@ -25,4 +25,8 @@
     <string name="hillfort_total">Total number of hillforts:</string>
     <string name="hillfort_total_visited">Total number of hillforts visited:</string>
     <string name="hint_additional_notes">Additional Notes</string>
+    <string name="title_activity_hillfort_maps">Map of All Hillforts</string>
+    <string name="hillfort_image_placeholder">Hillfort Image</string>
+    <string name="hillfort_title_placeholder">Hillfort Title</string>
+    <string name="hillfort_description_placeholder">Hillfort Description</string>
 </resources>
