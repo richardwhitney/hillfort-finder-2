@@ -35,6 +35,11 @@ class HillfortJSONStore: HillfortStore, AnkoLogger {
         return hillforts
     }
 
+    override fun findById(id: Long): HillfortModel? {
+        val foundHillfort: HillfortModel? = hillforts.find { it.id == id }
+        return foundHillfort
+    }
+
     override fun findByUserId(id: Long): List<HillfortModel> {
         return hillforts.filter { p -> p.userId == id }
     }
