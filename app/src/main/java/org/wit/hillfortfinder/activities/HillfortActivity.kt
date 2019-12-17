@@ -9,6 +9,8 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_hillfort.*
+import kotlinx.android.synthetic.main.activity_hillfort.hillfortTitle
+import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
@@ -43,26 +45,15 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             edit = true
             hillfort = intent.extras?.getParcelable<HillfortModel>("hillfort_edit")!!
             hillfortTitle.setText(hillfort.title)
-            hillfortDescription.setText(hillfort.description)
+            hillfortDiscription.setText(hillfort.description)
             hillfortVisited.isChecked = hillfort.visited
             dateVisited.setText(hillfort.dateVisited)
-            addtionalNotes.setText(hillfort.additionalNotes)
+            additionalNotes.setText(hillfort.additionalNotes)
+            ratingBar.rating = hillfort.rating
             btnAdd.setText(R.string.save_hillfort)
-            if (hillfort.images.size > 0) {
-                for (image in hillfort.images) {
-                    val imageView: ImageView = ImageView(this)
-                    var params: LinearLayout.LayoutParams = LinearLayout.LayoutParams(
-                        600,
-                        600
-                    )
-                    params.setMargins(0, 0, 10, 0)
-                    imageView.layoutParams = params
-                    imageView.setImageBitmap(readImageFromPath(this, image))
-                    imageGallery.addView(imageView)
-                }
-                if (hillfort.images[0] != null) {
-                    chooseImage.setText(R.string.change_hillfort_image)
-                }
+            hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+            if (hillfort.image != null) {
+                choseImage.setText(R.string.change_hillfort_image)
             }
         }
         else {
@@ -71,9 +62,10 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
 
         btnAdd.setOnClickListener {
             hillfort.title = hillfortTitle.text.toString()
-            hillfort.description = hillfortDescription.text.toString()
-            hillfort.additionalNotes = addtionalNotes.text.toString()
+            hillfort.description = hillfortDiscription.text.toString()
+            hillfort.additionalNotes = additionalNotes.text.toString()
             hillfort.dateVisited = dateVisited.text.toString()
+            hillfort.rating = ratingBar.rating
             hillfort.userId = app.currentUser?.id!!
             if (hillfort.title.isEmpty()) {
                 toast(R.string.enter_hillfort_title)
@@ -104,7 +96,7 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
             }
         }
 
-        chooseImage.setOnClickListener {
+        choseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
         }
 
@@ -144,9 +136,9 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 if (data != null) {
-                    hillfort.images.add(data.getData().toString())
+                    hillfort.image = data.getData().toString()
                     hillfortImage.setImageBitmap(readImage(this, resultCode, data))
-                    chooseImage.setText(R.string.change_hillfort_image)
+                    choseImage.setText(R.string.change_hillfort_image)
                 }
             }
             LOCATION_REQUEST -> {

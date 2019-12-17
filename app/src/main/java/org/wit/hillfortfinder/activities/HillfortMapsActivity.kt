@@ -62,7 +62,7 @@ class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
         val hillfort = app.hillforts.findById(tag)
         currentTitle.text = hillfort!!.title
         currentDescription.text = hillfort!!.description
-        currentImage.setImageBitmap(readImageFromPath(this, hillfort.images[0]))
+        currentImage.setImageBitmap(readImageFromPath(this, hillfort.image))
         return true
     }
 
