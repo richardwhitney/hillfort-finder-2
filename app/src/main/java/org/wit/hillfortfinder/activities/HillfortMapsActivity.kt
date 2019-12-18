@@ -11,8 +11,11 @@ import org.wit.hillfortfinder.R
 
 import kotlinx.android.synthetic.main.activity_hillfort_maps.*
 import kotlinx.android.synthetic.main.content_hillfort_maps.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import org.wit.hillfortfinder.helpers.readImageFromPath
 import org.wit.hillfortfinder.main.MainApp
+import org.wit.hillfortfinder.models.HillfortModel
 
 class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -59,21 +62,42 @@ class HillfortMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListene
 
     override fun onMarkerClick(marker: Marker): Boolean {
         val tag = marker.tag as Long
-        val hillfort = app.hillforts.findById(tag)
-        currentTitle.text = hillfort!!.title
-        currentDescription.text = hillfort!!.description
-        currentImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+        doAsync {
+            val hillfort = app.hillforts.findById(tag)
+            uiThread {
+                if (hillfort != null) {
+                    showHillfort(hillfort)
+                }
+            }
+        }
         return true
     }
 
-    fun configureMap() {
-        map.uiSettings.isZoomControlsEnabled = true
-        app.hillforts.findByUserId(app.currentUser?.id!!).forEach {
+    fun showHillfort(hillfort: HillfortModel) {
+        currentTitle.text = hillfort.title
+        currentDescription.text = hillfort.description
+        currentImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+    }
+
+    fun showHillforts(hillforts: List<HillfortModel>) {
+        hillforts.forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options).tag = it.id
             map.setOnMarkerClickListener(this)
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
+        }
+    }
+
+    fun configureMap() {
+        map.uiSettings.isZoomControlsEnabled = true
+        doAsync {
+            val hillforts = app.hillforts.findByUserId(app.currentUser?.id!!)
+            uiThread {
+                if (hillforts != null) {
+                    showHillforts(hillforts)
+                }
+            }
         }
     }
 }

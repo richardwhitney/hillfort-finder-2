@@ -4,6 +4,7 @@ import android.app.Application
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.hillfortfinder.models.*
+import org.wit.hillfortfinder.room.HillfortStoreRoom
 
 class MainApp: Application(), AnkoLogger {
 
@@ -13,7 +14,7 @@ class MainApp: Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        hillforts = HillfortJSONStore(applicationContext)
+        hillforts = HillfortStoreRoom(applicationContext)
         users = UserJSONStore(applicationContext)
         info("Hillfort Finder started")
     }

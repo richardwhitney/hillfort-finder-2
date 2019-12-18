@@ -6,13 +6,10 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
+import org.jetbrains.anko.*
 
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.main.MainApp
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.startActivityForResult
-import org.jetbrains.anko.toast
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.models.UserModel
 
@@ -34,9 +31,18 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
 
         info("Current user: ${app.currentUser}")
 
-        totalHillforts.text = "Total number of hillforts: ${getTotalHillforts()}"
-        totalHillfortsVisited.text = "Total number of hillforts visited: ${getTotalHillfortsVisited()}"
-
+        doAsync {
+            var numHillforts = getTotalHillforts()
+            uiThread {
+                totalHillforts.text = "Total number of hillforts: $numHillforts"
+            }
+        }
+        doAsync {
+            var numVisited = getTotalHillfortsVisited()
+            uiThread {
+                totalHillfortsVisited.text = "Total number of hillforts visited: $numVisited"
+            }
+        }
         btnSettings.setOnClickListener {
             info("Update Settings button pressed")
             user.email = settingsEmail.text.toString()

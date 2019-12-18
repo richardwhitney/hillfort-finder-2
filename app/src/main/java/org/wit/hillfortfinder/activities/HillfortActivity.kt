@@ -11,10 +11,7 @@ import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_hillfort.hillfortTitle
 import kotlinx.android.synthetic.main.card_hillfort.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.toast
+import org.jetbrains.anko.*
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.helpers.readImage
 import org.wit.hillfortfinder.helpers.readImageFromPath
@@ -71,16 +68,21 @@ class HillfortActivity : AppCompatActivity(), AnkoLogger {
                 toast(R.string.enter_hillfort_title)
             }
             else {
-                if (edit) {
-                    app.hillforts.update(hillfort.copy())
+                doAsync {
+                    if (edit) {
+                        app.hillforts.update(hillfort.copy())
+                    }
+                    else {
+                        app.hillforts.create(hillfort.copy())
+                    }
+                    uiThread {
+                        info("Add Button Pressed: $hillfortTitle")
+                        setResult(AppCompatActivity.RESULT_OK)
+                        finish()
+                    }
                 }
-                else {
-                    app.hillforts.create(hillfort.copy())
-                }
+
             }
-            info("Add Button Pressed: $hillfortTitle")
-            setResult(AppCompatActivity.RESULT_OK)
-            finish()
         }
 
         hillfortVisited.setOnClickListener {
