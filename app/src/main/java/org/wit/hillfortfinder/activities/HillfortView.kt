@@ -22,7 +22,7 @@ import org.wit.hillfortfinder.models.Location
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HillfortActivity : AppCompatActivity(), AnkoLogger {
+class HillfortView : AppCompatActivity(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
     var hillfort = HillfortModel()

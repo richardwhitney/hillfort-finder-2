@@ -11,7 +11,7 @@ import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 
-class HillfortListActivity: AppCompatActivity(), HillfortListener {
+class HillfortListView: AppCompatActivity(), HillfortListener {
 
     lateinit var presenter: HillfortListPresenter
 

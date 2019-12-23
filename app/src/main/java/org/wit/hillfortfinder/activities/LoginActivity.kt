@@ -31,7 +31,7 @@ class LoginActivity: AppCompatActivity() {
                 var user = app.users.loign(email, password)
                 if (user != null) {
                     app.currentUser = user
-                    startActivityForResult<HillfortListActivity>(0)
+                    startActivityForResult<HillfortListView>(0)
                 }
                 else {
                     toast("Email or password entered was incorrect")

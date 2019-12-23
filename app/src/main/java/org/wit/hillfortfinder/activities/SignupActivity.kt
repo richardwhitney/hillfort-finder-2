@@ -30,7 +30,7 @@ class SignupActivity: AppCompatActivity() {
             if (user.email.isNotEmpty() && user.password.isNotEmpty()) {
                 if (app.users.signup(user.copy())) {
                     app.currentUser = user
-                    startActivityForResult<HillfortListActivity>(0)
+                    startActivityForResult<HillfortListView>(0)
                 }
                 else {
                     toast("Email is already registered")

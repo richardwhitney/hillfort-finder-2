@@ -52,7 +52,7 @@ class SettingsActivity: AppCompatActivity(), AnkoLogger {
                 var updatedUser = app.users.update(user.copy())
                 if (updatedUser != null) {
                     app.currentUser = updatedUser
-                    startActivityForResult<HillfortListActivity>(0)
+                    startActivityForResult<HillfortListView>(0)
                 }
                 else {
                     toast("Email is already registered")

@@ -11,7 +11,7 @@ import org.wit.hillfortfinder.models.Location
 import java.text.SimpleDateFormat
 import java.util.*
 
-class HillfortPresenter(val view: HillfortActivity) {
+class HillfortPresenter(val view: HillfortView) {
 
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
@@ -82,7 +82,7 @@ class HillfortPresenter(val view: HillfortActivity) {
             location.lng = hillfort.lng
             location.zoom = hillfort.zoom
         }
-        view.startActivityForResult(view.intentFor<MapActivity>().putExtra("location", location), LOCATION_REQUEST)
+        view.startActivityForResult(view.intentFor<EditLocationActivity>().putExtra("location", location), LOCATION_REQUEST)
     }
 
     fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
