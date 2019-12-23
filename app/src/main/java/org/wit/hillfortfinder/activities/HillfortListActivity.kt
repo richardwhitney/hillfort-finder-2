@@ -13,15 +13,16 @@ import org.wit.hillfortfinder.models.HillfortModel
 
 class HillfortListActivity: AppCompatActivity(), HillfortListener {
 
-    lateinit var app: MainApp
+    lateinit var presenter: HillfortListPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
-        app = application as MainApp
 
         toolbar.title = title
         setSupportActionBar(toolbar)
+
+        presenter = HillfortListPresenter(this)
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
@@ -35,25 +36,25 @@ class HillfortListActivity: AppCompatActivity(), HillfortListener {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.item_add -> startActivityForResult<HillfortActivity>(0)
-            R.id.item_map -> startActivity<HillfortMapsActivity>()
-            R.id.item_settings -> startActivityForResult<SettingsActivity>(0)
+            R.id.item_add -> presenter.doAddHillfort()
+            R.id.item_map -> presenter.doShowHillfortsMap()
+            R.id.item_settings -> presenter.doShowSettings()
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onHillfortClick(hillfort: HillfortModel) {
-        startActivityForResult(intentFor<HillfortActivity>().putExtra("hillfort_edit", hillfort), 0)
+        presenter.doEditHillfort(hillfort)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        loadHillforts()
+        recyclerView.adapter?.notifyDataSetChanged()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun loadHillforts() {
         doAsync {
-            val hillforts = app.hillforts.findByUserId(app.currentUser?.id!!)
+            val hillforts = presenter.app.hillforts.findByUserId(presenter.app.currentUser?.id!!)
             uiThread {
                 showHillforts(hillforts)
             }
