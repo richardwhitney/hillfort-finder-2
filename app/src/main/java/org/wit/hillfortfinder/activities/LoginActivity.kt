@@ -12,35 +12,28 @@ import org.jetbrains.anko.toast
 
 class LoginActivity: AppCompatActivity() {
 
-    lateinit var app: MainApp
+    lateinit var presenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        app = application as MainApp
 
         toolbarLogin.title = "Login"
         setSupportActionBar(toolbarLogin)
 
-
+        presenter = LoginPresenter(this)
 
         login.setOnClickListener {
             var email: String = loginEmail.text.toString()
             var password: String = loginPassword.text.toString()
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                var user = app.users.loign(email, password)
-                if (user != null) {
-                    app.currentUser = user
-                    startActivityForResult<HillfortListView>(0)
-                }
-                else {
-                    toast("Email or password entered was incorrect")
+                if(!presenter.doLogin(email, password)) {
+                    toast("Email or password was incorrect")
                 }
             }
             else {
                 toast("Email and password are required")
             }
-
         }
     }
 
@@ -51,7 +44,7 @@ class LoginActivity: AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
-            R.id.item_signup -> startActivityForResult<SignupActivity>(0)
+            R.id.item_signup -> presenter.showSignup()
         }
         return super.onOptionsItemSelected(item)
     }
