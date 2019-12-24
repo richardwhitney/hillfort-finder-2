@@ -1,8 +1,9 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.signup
 
 import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.UserModel
+import org.wit.hillfortfinder.views.hillfortlist.HillfortListView
 
 class SignupPresenter(val view: SignupView) {
 

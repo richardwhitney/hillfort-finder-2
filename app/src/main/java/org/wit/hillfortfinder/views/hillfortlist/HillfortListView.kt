@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.hillfortlist
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,10 +8,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.*
 import org.wit.hillfortfinder.R
-import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 
-class HillfortListView: AppCompatActivity(), HillfortListener {
+class HillfortListView: AppCompatActivity(),
+    HillfortListener {
 
     lateinit var presenter: HillfortListPresenter
 
@@ -62,7 +62,8 @@ class HillfortListView: AppCompatActivity(), HillfortListener {
     }
 
     fun showHillforts(hillforts: List<HillfortModel>) {
-        recyclerView.adapter = HillfortAdapter(hillforts, this)
+        recyclerView.adapter =
+            HillfortAdapter(hillforts, this)
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }

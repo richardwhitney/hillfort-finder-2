@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.settings
 
 import android.os.Bundle
 import android.view.Menu

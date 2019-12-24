@@ -1,8 +1,11 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.hillfortlist
 
 import org.jetbrains.anko.*
+import org.wit.hillfortfinder.views.map.HillfortMapsView
+import org.wit.hillfortfinder.views.settings.SettingsView
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.views.hillfort.HillfortView
 
 class HillfortListPresenter(val view: HillfortListView) {
 

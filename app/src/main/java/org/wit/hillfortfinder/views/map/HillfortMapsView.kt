@@ -1,37 +1,34 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfortfinder.R
 
 import kotlinx.android.synthetic.main.activity_hillfort_maps.*
 import kotlinx.android.synthetic.main.content_hillfort_maps.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 import org.wit.hillfortfinder.helpers.readImageFromPath
-import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 
 class HillfortMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
+    lateinit var presenter: HillfortMapsPresenter
     lateinit var map: GoogleMap
-    lateinit var app: MainApp
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_maps)
         toolbar.title = title
         setSupportActionBar(toolbar)
-        app = application as MainApp
+
+        presenter = HillfortMapsPresenter(this)
+
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it
-            configureMap()
+            map.setOnMarkerClickListener(this)
+            presenter.loadHillforts()
         }
     }
 
@@ -61,15 +58,7 @@ class HillfortMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val tag = marker.tag as Long
-        doAsync {
-            val hillfort = app.hillforts.findById(tag)
-            uiThread {
-                if (hillfort != null) {
-                    showHillfort(hillfort)
-                }
-            }
-        }
+        presenter.doMarkerSelected(marker)
         return true
     }
 
@@ -80,24 +69,6 @@ class HillfortMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
     }
 
     fun showHillforts(hillforts: List<HillfortModel>) {
-        hillforts.forEach {
-            val loc = LatLng(it.lat, it.lng)
-            val options = MarkerOptions().title(it.title).position(loc)
-            map.addMarker(options).tag = it.id
-            map.setOnMarkerClickListener(this)
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
-        }
-    }
-
-    fun configureMap() {
-        map.uiSettings.isZoomControlsEnabled = true
-        doAsync {
-            val hillforts = app.hillforts.findByUserId(app.currentUser?.id!!)
-            uiThread {
-                if (hillforts != null) {
-                    showHillforts(hillforts)
-                }
-            }
-        }
+        presenter.doPopulateMap(map, hillforts)
     }
 }

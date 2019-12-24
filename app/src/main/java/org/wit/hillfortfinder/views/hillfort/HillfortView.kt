@@ -1,26 +1,16 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.hillfort
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_hillfort.hillfortTitle
-import kotlinx.android.synthetic.main.card_hillfort.*
 import org.jetbrains.anko.*
 import org.wit.hillfortfinder.R
-import org.wit.hillfortfinder.helpers.readImage
 import org.wit.hillfortfinder.helpers.readImageFromPath
-import org.wit.hillfortfinder.helpers.showImagePicker
-import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
-import org.wit.hillfortfinder.models.Location
-import java.text.SimpleDateFormat
-import java.util.*
 
 class HillfortView : AppCompatActivity(), AnkoLogger {
 

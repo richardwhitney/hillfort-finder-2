@@ -1,7 +1,6 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.signup
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.toast

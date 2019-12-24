@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.settings
 
 import android.content.Intent
 import org.jetbrains.anko.doAsync
@@ -7,6 +7,8 @@ import org.jetbrains.anko.uiThread
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.models.UserModel
+import org.wit.hillfortfinder.views.hillfortlist.HillfortListView
+import org.wit.hillfortfinder.views.login.LoginView
 
 class SettingsPresenter(val view: SettingsView) {
 

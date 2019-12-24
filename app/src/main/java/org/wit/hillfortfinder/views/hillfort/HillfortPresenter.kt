@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.activities
+package org.wit.hillfortfinder.views.hillfort
 
 import android.content.Intent
 import org.jetbrains.anko.doAsync
@@ -8,6 +8,7 @@ import org.wit.hillfortfinder.helpers.showImagePicker
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.models.Location
+import org.wit.hillfortfinder.views.editlocation.EditLocationView
 import java.text.SimpleDateFormat
 import java.util.*
 

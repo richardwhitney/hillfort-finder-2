@@ -7,6 +7,7 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import org.wit.hillfortfinder.R
+import org.wit.hillfortfinder.views.login.LoginView
 
 class SplashActivity : AppCompatActivity() {
 
