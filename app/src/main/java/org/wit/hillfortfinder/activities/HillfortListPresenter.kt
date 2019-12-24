@@ -34,6 +34,6 @@ class HillfortListPresenter(val view: HillfortListView) {
     }
 
     fun doShowSettings() {
-        view.startActivity<SettingsActivity>()
+        view.startActivity<SettingsView>()
     }
 }

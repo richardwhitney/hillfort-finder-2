@@ -26,7 +26,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.EditLocationActivity"
+            android:name=".activities.EditLocationView"
             android:label="@string/title_activity_map" />
         <activity
             android:name=".activities.HillfortView"
@@ -39,12 +39,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.LoginActivity"></activity>
+        <activity android:name=".activities.LoginView"></activity>
         <activity
-            android:name=".activities.SignupActivity"
-            android:parentActivityName=".activities.LoginActivity"></activity>
+            android:name=".activities.SignupView"
+            android:parentActivityName=".activities.LoginView"></activity>
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".activities.SettingsView"
             android:parentActivityName=".activities.HillfortListView"></activity>
     </application>
 

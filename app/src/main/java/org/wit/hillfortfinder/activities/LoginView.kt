@@ -6,11 +6,9 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.wit.hillfortfinder.R
-import org.wit.hillfortfinder.main.MainApp
-import org.jetbrains.anko.startActivityForResult
 import org.jetbrains.anko.toast
 
-class LoginActivity: AppCompatActivity() {
+class LoginView: AppCompatActivity() {
 
     lateinit var presenter: LoginPresenter
 

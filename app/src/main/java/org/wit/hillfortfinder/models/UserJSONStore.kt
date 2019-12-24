@@ -1,3 +1,4 @@
+
 package org.wit.hillfortfinder.models
 
 import android.content.Context

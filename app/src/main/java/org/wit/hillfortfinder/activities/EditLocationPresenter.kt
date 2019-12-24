@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.wit.hillfortfinder.models.Location
 
-class EditLocationPresenter (val view: EditLocationActivity) {
+class EditLocationPresenter (val view: EditLocationView) {
 
     var location = Location()
 

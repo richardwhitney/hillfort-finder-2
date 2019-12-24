@@ -2,27 +2,26 @@ package org.wit.hillfortfinder.activities
 
 import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfortfinder.main.MainApp
+import org.wit.hillfortfinder.models.UserModel
 
-class LoginPresenter(val view: LoginView) {
+class SignupPresenter(val view: SignupView) {
 
     var app: MainApp
+    var user = UserModel()
 
     init {
         app = view.application as MainApp
     }
 
-    fun doLogin(email: String, password: String): Boolean {
-        var user = app.users.loign(email, password)
-        return if (user != null) {
+    fun doSignup(email: String, password: String): Boolean {
+        user.email = email
+        user.password = password
+        return if (app.users.signup(user.copy())) {
             app.currentUser = user
             view.startActivityForResult<HillfortListView>(0)
             true
         } else {
             false
         }
-    }
-
-    fun showSignup() {
-        view.startActivityForResult<SignupView>(0)
     }
 }

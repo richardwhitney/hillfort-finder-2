@@ -6,3 +6,4 @@ interface UserStore {
     fun loign(email: String, password: String): UserModel?
     fun update(user: UserModel): UserModel?
 }
+  
