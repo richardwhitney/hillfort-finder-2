@@ -121,13 +121,13 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-                android:text="@string/button_addImage"
                 android:background="@color/colorAccent"
+                android:text="@string/button_addImage"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+                app:layout_constraintTop_toBottomOf="@+id/hillfortDiscription" />
 
             <ImageView
                 android:id="@+id/hillfortImage"
@@ -143,34 +143,19 @@
                 android:contentDescription="TODO" />
 
             <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="0dp"
-                android:layout_height="47dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:text="@string/button_addHillfort"
-                android:background="@color/colorAccent"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/hillfortDiscription" />
-
-            <Button
                 android:id="@+id/hillfortLocation"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="@string/button_location"
                 android:background="@color/colorAccent"
+                android:text="@string/button_location"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+                app:layout_constraintTop_toBottomOf="@+id/hillfortDiscription" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline"

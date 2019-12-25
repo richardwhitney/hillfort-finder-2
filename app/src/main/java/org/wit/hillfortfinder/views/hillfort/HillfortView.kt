@@ -26,16 +26,6 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
 
         presenter = HillfortPresenter(this)
 
-        btnAdd.setOnClickListener {
-            if (hillfortTitle.text.toString().isEmpty()) {
-                toast(R.string.enter_hillfort_title)
-            }
-            else {
-                presenter.doAddOrSave(hillfortTitle.text.toString(), hillfortDiscription.text.toString(),
-                    additionalNotes.text.toString(), dateVisited.text.toString(), ratingBar.rating )
-            }
-        }
-
         hillfortVisited.setOnClickListener {
             dateVisited.text = presenter.doVisited(hillfortVisited.isChecked)
         }
@@ -57,7 +47,6 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
         additionalNotes.setText(hillfort.additionalNotes)
         ratingBar.rating = hillfort.rating
         hillfortImage.setImageBitmap(readImageFromPath(this, hillfort.image))
-        btnAdd.setText(R.string.save_hillfort)
         if (hillfort.image != null) {
             choseImage.setText(R.string.change_hillfort_image)
         }
@@ -72,8 +61,14 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item?.itemId) {
-            R.id.item_cancel -> {
-                presenter.doCancel()
+            R.id.item_save -> {
+                if (hillfortTitle.text.toString().isEmpty()) {
+                    toast(R.string.enter_hillfort_title)
+                }
+                else {
+                    presenter.doAddOrSave(hillfortTitle.text.toString(), hillfortDiscription.text.toString(),
+                        additionalNotes.text.toString(), dateVisited.text.toString(), ratingBar.rating)
+                }
             }
             R.id.item_delete -> {
                 presenter.doDelete()
