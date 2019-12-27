@@ -6,8 +6,9 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.Marker
 import org.wit.hillfortfinder.R
+import org.wit.hillfortfinder.views.BaseView
 
-class EditLocationView : AppCompatActivity(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
+class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
 
     lateinit var map: GoogleMap
     lateinit var presenter: EditLocationPresenter
@@ -16,12 +17,12 @@ class EditLocationView : AppCompatActivity(), GoogleMap.OnMarkerDragListener, Go
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
-        presenter = EditLocationPresenter(this)
+        presenter = initPresenter(EditLocationPresenter(this)) as EditLocationPresenter
         mapFragment.getMapAsync {
             map = it
             map.setOnMarkerDragListener(this)
             map.setOnMarkerClickListener(this)
-            presenter.initMap(map)
+            presenter.doConfigureMap(map)
         }
     }
 
@@ -34,7 +35,7 @@ class EditLocationView : AppCompatActivity(), GoogleMap.OnMarkerDragListener, Go
     }
 
     override fun onBackPressed() {
-        presenter.doOnBackPressed()
+        presenter.doSave()
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
