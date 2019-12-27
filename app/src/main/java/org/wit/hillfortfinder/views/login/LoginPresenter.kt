@@ -3,21 +3,18 @@ package org.wit.hillfortfinder.views.login
 import org.jetbrains.anko.startActivityForResult
 import org.wit.hillfortfinder.views.signup.SignupView
 import org.wit.hillfortfinder.main.MainApp
+import org.wit.hillfortfinder.views.BasePresenter
+import org.wit.hillfortfinder.views.BaseView
+import org.wit.hillfortfinder.views.VIEW
 import org.wit.hillfortfinder.views.hillfortlist.HillfortListView
 
-class LoginPresenter(val view: LoginView) {
-
-    var app: MainApp
-
-    init {
-        app = view.application as MainApp
-    }
+class LoginPresenter(view: BaseView): BasePresenter(view) {
 
     fun doLogin(email: String, password: String): Boolean {
         var user = app.users.loign(email, password)
         return if (user != null) {
             app.currentUser = user
-            view.startActivityForResult<HillfortListView>(0)
+            view?.navigateTo(VIEW.LIST)
             true
         } else {
             false
@@ -25,6 +22,6 @@ class LoginPresenter(val view: LoginView) {
     }
 
     fun showSignup() {
-        view.startActivityForResult<SignupView>(0)
+        view?.navigateTo(VIEW.SIGNUP)
     }
 }

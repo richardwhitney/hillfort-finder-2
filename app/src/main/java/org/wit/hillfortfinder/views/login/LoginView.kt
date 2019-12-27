@@ -7,19 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.wit.hillfortfinder.R
 import org.jetbrains.anko.toast
+import org.wit.hillfortfinder.views.BaseView
 
-class LoginView: AppCompatActivity() {
+class LoginView: BaseView() {
 
     lateinit var presenter: LoginPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
-        toolbarLogin.title = "Login"
         setSupportActionBar(toolbarLogin)
 
-        presenter = LoginPresenter(this)
+        presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
 
         login.setOnClickListener {
             var email: String = loginEmail.text.toString()
