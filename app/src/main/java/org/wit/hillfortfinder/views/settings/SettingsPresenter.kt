@@ -7,21 +7,22 @@ import org.jetbrains.anko.uiThread
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.models.UserModel
+import org.wit.hillfortfinder.views.BasePresenter
+import org.wit.hillfortfinder.views.BaseView
+import org.wit.hillfortfinder.views.VIEW
 import org.wit.hillfortfinder.views.hillfortlist.HillfortListView
 import org.wit.hillfortfinder.views.login.LoginView
 
-class SettingsPresenter(val view: SettingsView) {
+class SettingsPresenter(view: BaseView): BasePresenter(view) {
 
-    var app: MainApp
     var user = UserModel()
 
     init {
-        app = view.application as MainApp
         doAsync {
             var numHillforts = getTotalHillforts()
             var numVisited = getTotalHillfortsVisited()
             uiThread {
-                view.showSettings(app.currentUser?.email!!, app.currentUser?.password!!, numHillforts, numVisited)
+                view?.showSettings(app.currentUser?.email!!, app.currentUser?.password!!, numHillforts, numVisited)
             }
         }
     }
@@ -33,7 +34,7 @@ class SettingsPresenter(val view: SettingsView) {
         var updatedUser = app.users.update(user.copy())
         return if (updatedUser != null) {
             app.currentUser = updatedUser
-            view.startActivityForResult<HillfortListView>(0)
+            view?.navigateTo(VIEW.LIST, 0)
             true
         } else {
             false
@@ -44,8 +45,8 @@ class SettingsPresenter(val view: SettingsView) {
         app.currentUser = null
         val intent = Intent(view, LoginView::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        view.startActivity(intent)
-        view.finish()
+        view?.startActivity(intent)
+        view?.finish()
     }
 
     private fun getTotalHillforts(): Int {

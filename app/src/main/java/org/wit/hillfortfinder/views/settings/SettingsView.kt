@@ -8,19 +8,19 @@ import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.*
 
 import org.wit.hillfortfinder.R
+import org.wit.hillfortfinder.views.BaseView
 
-class SettingsView: AppCompatActivity(), AnkoLogger {
+class SettingsView: BaseView(), AnkoLogger {
 
     lateinit var presenter: SettingsPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
-        toolbarSettings.title = "Settings"
-        setSupportActionBar(toolbarSettings)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        presenter = SettingsPresenter(this)
+        init(toolbarSettings)
+
+        presenter = initPresenter(SettingsPresenter(this)) as SettingsPresenter
 
         btnSettings.setOnClickListener {
             info("Update Settings button pressed")
@@ -35,7 +35,7 @@ class SettingsView: AppCompatActivity(), AnkoLogger {
         }
     }
 
-    fun showSettings(email: String, password: String, numHillforts: Int, numVisited: Int) {
+    override fun showSettings(email: String, password: String, numHillforts: Int, numVisited: Int) {
         settingsEmail.setText(email)
         settingsPassword.setText(password)
         totalHillforts.text = "Total number of hillforts: $numHillforts"
