@@ -5,38 +5,35 @@ import org.wit.hillfortfinder.views.map.HillfortMapsView
 import org.wit.hillfortfinder.views.settings.SettingsView
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.views.BasePresenter
+import org.wit.hillfortfinder.views.BaseView
+import org.wit.hillfortfinder.views.VIEW
 import org.wit.hillfortfinder.views.hillfort.HillfortView
 
-class HillfortListPresenter(val view: HillfortListView) {
-
-    var app: MainApp
-
-    init {
-        app = view.application as MainApp
-    }
-
-    fun getHillforts() {
-        doAsync {
-            val hillforts = app.hillforts.findByUserId(app.currentUser?.id!!)
-            uiThread {
-                view.showHillforts(hillforts)
-            }
-        }
-    }
+class HillfortListPresenter(view: BaseView): BasePresenter(view) {
 
     fun doAddHillfort() {
-        view.startActivityForResult<HillfortView>(0)
+        view?.navigateTo(VIEW.HILLFORT)
     }
 
     fun doEditHillfort(hillfort: HillfortModel) {
-        view.startActivityForResult(view.intentFor<HillfortView>().putExtra("hillfort_edit", hillfort), 0)
+        view?.navigateTo(VIEW.HILLFORT, 0, "hillfort_edit", hillfort)
     }
 
     fun doShowHillfortsMap() {
-        view.startActivity<HillfortMapsView>()
+        view?.navigateTo(VIEW.MAPS)
     }
 
     fun doShowSettings() {
-        view.startActivity<SettingsView>()
+        view?.navigateTo(VIEW.SETTINGS)
+    }
+
+    fun loadHillforts() {
+        doAsync {
+            val hillforts = app.hillforts.findByUserId(app.currentUser?.id!!)
+            uiThread {
+                view?.showHillforts(hillforts)
+            }
+        }
     }
 }

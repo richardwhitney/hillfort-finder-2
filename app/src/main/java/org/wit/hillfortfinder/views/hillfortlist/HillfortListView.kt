@@ -9,8 +9,9 @@ import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.*
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.views.BaseView
 
-class HillfortListView: AppCompatActivity(),
+class HillfortListView: BaseView(),
     HillfortListener {
 
     lateinit var presenter: HillfortListPresenter
@@ -19,14 +20,13 @@ class HillfortListView: AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_list)
 
-        toolbar.title = title
         setSupportActionBar(toolbar)
 
-        presenter = HillfortListPresenter(this)
+        presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        loadHillforts()
+        presenter.loadHillforts()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,22 +48,12 @@ class HillfortListView: AppCompatActivity(),
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        presenter.loadHillforts()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun loadHillforts() {
-        doAsync {
-            val hillforts = presenter.app.hillforts.findByUserId(presenter.app.currentUser?.id!!)
-            uiThread {
-                showHillforts(hillforts)
-            }
-        }
-    }
-
-    fun showHillforts(hillforts: List<HillfortModel>) {
-        recyclerView.adapter =
-            HillfortAdapter(hillforts, this)
+    override fun showHillforts(hillforts: List<HillfortModel>) {
+        recyclerView.adapter = HillfortAdapter(hillforts, this)
         recyclerView.adapter?.notifyDataSetChanged()
     }
 }
