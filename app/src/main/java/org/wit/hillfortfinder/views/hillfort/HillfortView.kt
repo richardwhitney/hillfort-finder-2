@@ -11,8 +11,9 @@ import org.jetbrains.anko.*
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.helpers.readImageFromPath
 import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.views.BaseView
 
-class HillfortView : AppCompatActivity(), AnkoLogger {
+class HillfortView : BaseView(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
     var hillfort = HillfortModel()
@@ -20,11 +21,10 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
-        toolbarAdd.title = title
-        setSupportActionBar(toolbarAdd)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        presenter = HillfortPresenter(this)
+        init(toolbarAdd)
+
+        presenter = initPresenter(HillfortPresenter(this)) as HillfortPresenter
 
         hillfortVisited.setOnClickListener {
             dateVisited.text = presenter.doVisited(hillfortVisited.isChecked)
@@ -39,7 +39,7 @@ class HillfortView : AppCompatActivity(), AnkoLogger {
         }
     }
 
-    fun showHillfort(hillfort: HillfortModel) {
+    override fun showHillfort(hillfort: HillfortModel) {
         hillfortTitle.setText(hillfort.title)
         hillfortDiscription.setText(hillfort.title)
         hillfortVisited.isChecked = hillfort.visited
