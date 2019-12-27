@@ -5,8 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.toast
 import org.wit.hillfortfinder.R
+import org.wit.hillfortfinder.views.BaseView
 
-class SignupView: AppCompatActivity() {
+class SignupView: BaseView() {
 
     lateinit var presenter: SignupPresenter
 
@@ -14,11 +15,10 @@ class SignupView: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        presenter = SignupPresenter(this)
+        presenter = initPresenter(SignupPresenter(this)) as SignupPresenter
 
         toolbarSignup.title = "Create Account"
-        setSupportActionBar(toolbarSignup)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        init(toolbarSignup)
 
         signup.setOnClickListener {
             var email = signupEmail.text.toString()
