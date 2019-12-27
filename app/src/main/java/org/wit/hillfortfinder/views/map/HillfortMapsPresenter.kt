@@ -9,14 +9,10 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.views.BasePresenter
+import org.wit.hillfortfinder.views.BaseView
 
-class HillfortMapsPresenter(val view: HillfortMapsView) {
-
-    var app: MainApp
-
-    init {
-        app = view.application as MainApp
-    }
+class HillfortMapsPresenter(view: BaseView): BasePresenter(view) {
 
     fun doPopulateMap(map: GoogleMap, hillforts: List<HillfortModel>) {
         map.uiSettings.isZoomControlsEnabled = true
@@ -34,7 +30,7 @@ class HillfortMapsPresenter(val view: HillfortMapsView) {
             val hillfort = app.hillforts.findById(tag)
             uiThread {
                 if (hillfort != null) {
-                    view.showHillfort(hillfort)
+                    view?.showHillfort(hillfort)
                 }
             }
         }
@@ -45,7 +41,7 @@ class HillfortMapsPresenter(val view: HillfortMapsView) {
             val hillforts = app.hillforts.findByUserId(app.currentUser?.id!!)
             uiThread {
                 if (hillforts != null) {
-                    view.showHillforts(hillforts)
+                    view?.showHillforts(hillforts)
                 }
             }
         }

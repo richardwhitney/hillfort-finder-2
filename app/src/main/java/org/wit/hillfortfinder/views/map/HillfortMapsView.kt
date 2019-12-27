@@ -10,8 +10,9 @@ import kotlinx.android.synthetic.main.activity_hillfort_maps.*
 import kotlinx.android.synthetic.main.content_hillfort_maps.*
 import org.wit.hillfortfinder.helpers.readImageFromPath
 import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.views.BaseView
 
-class HillfortMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class HillfortMapsView : BaseView(), GoogleMap.OnMarkerClickListener {
 
     lateinit var presenter: HillfortMapsPresenter
     lateinit var map: GoogleMap
@@ -20,9 +21,9 @@ class HillfortMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort_maps)
         toolbar.title = title
-        setSupportActionBar(toolbar)
+        init(toolbar)
 
-        presenter = HillfortMapsPresenter(this)
+        presenter = initPresenter(HillfortMapsPresenter(this)) as HillfortMapsPresenter
 
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
@@ -62,13 +63,13 @@ class HillfortMapsView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
         return true
     }
 
-    fun showHillfort(hillfort: HillfortModel) {
+    override fun showHillfort(hillfort: HillfortModel) {
         currentTitle.text = hillfort.title
         currentDescription.text = hillfort.description
         currentImage.setImageBitmap(readImageFromPath(this, hillfort.image))
     }
 
-    fun showHillforts(hillforts: List<HillfortModel>) {
+    override fun showHillforts(hillforts: List<HillfortModel>) {
         presenter.doPopulateMap(map, hillforts)
     }
 }
