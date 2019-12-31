@@ -18,7 +18,7 @@ class SignupView: BaseView() {
         presenter = initPresenter(SignupPresenter(this)) as SignupPresenter
 
         toolbarSignup.title = "Create Account"
-        init(toolbarSignup)
+        super.init(toolbarSignup, true)
 
         signup.setOnClickListener {
             var email = signupEmail.text.toString()

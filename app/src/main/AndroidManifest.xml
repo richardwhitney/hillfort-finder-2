@@ -19,7 +19,11 @@
         <activity
             android:name=".views.map.HillfortMapsView"
             android:label="@string/title_activity_hillfort_maps"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.hillfortlist.HillfortListView"/>
+        </activity>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -27,11 +31,25 @@
 
         <activity
             android:name=".views.editlocation.EditLocationView"
-            android:label="@string/title_activity_map" />
+            android:label="@string/title_activity_map">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.hillfort.HillfortView"/>
+        </activity>
+
         <activity
             android:name=".views.hillfort.HillfortView"
-            android:parentActivityName=".views.hillfortlist.HillfortListView"></activity>
-        <activity android:name=".views.hillfortlist.HillfortListView"></activity>
+            android:label="@string/title_activity_hillfort">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.hillfortlist.HillfortListView"/>
+        </activity>
+
+        <activity
+            android:name=".views.hillfortlist.HillfortListView"
+            android:label="@string/title_activity_hillfort_list">
+        </activity>
+
         <activity android:name=".activities.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,13 +57,28 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".views.login.LoginView"></activity>
+
+        <activity
+            android:name=".views.login.LoginView"
+            android:label="@string/title_activity_login">
+        </activity>
+
         <activity
             android:name=".views.signup.SignupView"
-            android:parentActivityName=".views.login.LoginView"></activity>
+            android:label="@string/title_activity_signup">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.login.LoginView"/>
+        </activity>
+
         <activity
             android:name=".views.settings.SettingsView"
-            android:parentActivityName=".views.hillfortlist.HillfortListView"></activity>
+            android:label="@string/title_activity_settins">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".views.hillfortlist.HillfortListView"/>
+        </activity>
+
     </application>
 
 </manifest>

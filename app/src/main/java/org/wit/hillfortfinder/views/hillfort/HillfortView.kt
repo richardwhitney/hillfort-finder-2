@@ -22,7 +22,7 @@ class HillfortView : BaseView(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hillfort)
 
-        init(toolbarAdd)
+        super.init(toolbarAdd, true)
 
         presenter = initPresenter(HillfortPresenter(this)) as HillfortPresenter
 

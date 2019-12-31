@@ -18,7 +18,7 @@ class SettingsView: BaseView(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        init(toolbarSettings)
+        super.init(toolbarSettings, true)
 
         presenter = initPresenter(SettingsPresenter(this)) as SettingsPresenter
 
