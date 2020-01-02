@@ -1,6 +1,8 @@
 package org.wit.hillfortfinder.views.login
 
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.startActivityForResult
+import org.jetbrains.anko.toast
 import org.wit.hillfortfinder.views.signup.SignupView
 import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.views.BasePresenter
@@ -10,14 +12,16 @@ import org.wit.hillfortfinder.views.hillfortlist.HillfortListView
 
 class LoginPresenter(view: BaseView): BasePresenter(view) {
 
-    fun doLogin(email: String, password: String): Boolean {
-        var user = app.users.loign(email, password)
-        return if (user != null) {
-            app.currentUser = user
-            view?.navigateTo(VIEW.LIST)
-            true
-        } else {
-            false
+    fun doLogin(email: String, password: String) {
+        view?.showProgress()
+        app.auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
+            if (task.isSuccessful) {
+                view?.navigateTo(VIEW.LIST)
+            }
+            else {
+                view?.toast("Login Failed: ${task.exception?.message}")
+            }
+            view?.hideProgress()
         }
     }
 

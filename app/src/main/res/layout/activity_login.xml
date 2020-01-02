@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/loginBarLayout"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorAccent"
@@ -26,55 +26,73 @@
                 android:id="@+id/toolbarLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:titleTextColor="@color/colorPrimary"/>
+                app:titleTextColor="@color/colorPrimary" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/loginBarLayout"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:layout_height="match_parent">
 
             <EditText
                 android:id="@+id/loginEmail"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="8dp"
-                android:hint="@string/hint_email"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="64dp"
+                android:layout_marginEnd="8dp"
                 android:inputType="text"
-                android:maxLength="25"
-                android:maxLines="1"
-                android:padding="8dp"
+                android:hint="@string/hint_email"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/loginPassword"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_margin="8dp"
-                android:hint="@string/hint_password"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:inputType="textPassword"
+                android:hint="@string/hint_password"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp"
                 android:maxLength="25"
                 android:maxLines="1"
-                android:padding="8dp"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="14sp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
 
             <Button
                 android:id="@+id/login"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
                 android:background="@color/colorAccent"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp"
                 android:text="@string/button_login"
-                android:stateListAnimator="@null"
                 android:textColor="@color/colorPrimary"
-                android:textSize="16sp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
-        </LinearLayout>
+            <ProgressBar
+                android:id="@+id/progressBarLogin"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/login" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </RelativeLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

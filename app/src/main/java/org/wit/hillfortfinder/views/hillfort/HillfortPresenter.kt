@@ -34,7 +34,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         hillfort.additionalNotes = additionalNotes
         hillfort.dateVisited = dateVisited
         hillfort.rating = rating
-        hillfort.userId = app.currentUser?.id!!
+        hillfort.userId = app.auth.currentUser?.uid!!
         doAsync {
             if (edit) {
                 app.hillforts.update(hillfort)

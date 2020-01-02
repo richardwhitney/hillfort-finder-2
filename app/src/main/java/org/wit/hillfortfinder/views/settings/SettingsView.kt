@@ -24,20 +24,17 @@ class SettingsView: BaseView(), AnkoLogger {
 
         btnSettings.setOnClickListener {
             info("Update Settings button pressed")
-            if (settingsEmail.text.isNotEmpty() && settingsPassword.text.isNotEmpty()) {
-                if (!presenter.doUpdateSettings(settingsEmail.text.toString(), settingsPassword.text.toString())) {
-                    toast("Email is already registered")
-                }
+            if (!settingsEmail.text.isNotEmpty() && !settingsPassword.text.isNotEmpty()) {
+                toast("Email and password are required")
             }
             else {
-                toast("Email and password are required")
+                presenter.doUpdateSettings(settingsEmail.text.toString(), settingsPassword.text.toString())
             }
         }
     }
 
-    override fun showSettings(email: String, password: String, numHillforts: Int, numVisited: Int) {
+    override fun showSettings(email: String, numHillforts: Int, numVisited: Int) {
         settingsEmail.setText(email)
-        settingsPassword.setText(password)
         totalHillforts.text = "Total number of hillforts: $numHillforts"
         totalHillfortsVisited.text = "Total number of hillforts visited: $numVisited"
     }

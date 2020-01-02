@@ -35,7 +35,7 @@ class UserJSONStore: UserStore, AnkoLogger {
     override fun signup(user: UserModel): Boolean {
         var foundUser: UserModel? = users.find { p -> p.email == user.email }
         if (foundUser == null) {
-            user.id = generateRandomId()
+            user.id = generateRandomId().toString()
             users.add(user)
             serialize()
             return true

@@ -24,7 +24,7 @@ class HillfortStoreRoom(val context: Context) : HillfortStore {
         return dao.findById(id)
     }
 
-    override fun findByUserId(id: Long): List<HillfortModel> {
+    override fun findByUserId(id: String): List<HillfortModel> {
         return dao.findByUserId(id)
     }
 

@@ -1,6 +1,7 @@
 package org.wit.hillfortfinder.views.signup
 
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.toast
@@ -17,20 +18,28 @@ class SignupView: BaseView() {
 
         presenter = initPresenter(SignupPresenter(this)) as SignupPresenter
 
+        progressBarSignup.visibility = View.GONE
+
         toolbarSignup.title = "Create Account"
         super.init(toolbarSignup, true)
 
         signup.setOnClickListener {
             var email = signupEmail.text.toString()
             var password = signupPassword.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                if (!presenter.doSignup(email, password)) {
-                    toast("Email is already registerd")
-                }
-            }
-            else {
+            if (!email.isNotEmpty() && !password.isNotEmpty()) {
                 toast("Email and password are required")
             }
+            else {
+                presenter.doSignup(email, password)
+            }
         }
+    }
+
+    override fun showProgress() {
+        progressBarSignup.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progressBarSignup.visibility = View.GONE
     }
 }

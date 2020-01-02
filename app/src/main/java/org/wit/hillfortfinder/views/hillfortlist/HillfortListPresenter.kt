@@ -30,7 +30,7 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view) {
 
     fun loadHillforts() {
         doAsync {
-            val hillforts = app.hillforts.findByUserId(app.currentUser?.id!!)
+            val hillforts = app.hillforts.findByUserId(app.auth.currentUser?.uid!!)
             uiThread {
                 view?.showHillforts(hillforts)
             }

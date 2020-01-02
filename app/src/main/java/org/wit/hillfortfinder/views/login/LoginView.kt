@@ -3,6 +3,7 @@ package org.wit.hillfortfinder.views.login
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import org.wit.hillfortfinder.R
@@ -21,16 +22,16 @@ class LoginView: BaseView() {
 
         presenter = initPresenter(LoginPresenter(this)) as LoginPresenter
 
+        progressBarLogin.visibility = View.GONE
+
         login.setOnClickListener {
             var email: String = loginEmail.text.toString()
             var password: String = loginPassword.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                if(!presenter.doLogin(email, password)) {
-                    toast("Email or password was incorrect")
-                }
+            if (!email.isNotEmpty() && !password.isNotEmpty()) {
+                toast("Email and password are required")
             }
             else {
-                toast("Email and password are required")
+                presenter.doLogin(email, password)
             }
         }
     }
@@ -45,5 +46,13 @@ class LoginView: BaseView() {
             R.id.item_signup -> presenter.showSignup()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showProgress() {
+        progressBarLogin.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progressBarLogin.visibility = View.GONE
     }
 }
