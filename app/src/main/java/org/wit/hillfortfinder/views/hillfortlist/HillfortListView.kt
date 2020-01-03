@@ -3,18 +3,20 @@ package org.wit.hillfortfinder.views.hillfortlist
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.fragment.app.FragmentTransaction
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_hillfort_list.*
-import org.jetbrains.anko.*
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.views.BaseView
+import org.wit.hillfortfinder.views.hillfortlist.fragment.AllHillfortsFragment
+import org.wit.hillfortfinder.views.hillfortlist.fragment.FavouriteHillfortsFragment
 
 class HillfortListView: BaseView(),
     HillfortListener {
 
     lateinit var presenter: HillfortListPresenter
+    lateinit var ft: FragmentTransaction
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,11 +24,20 @@ class HillfortListView: BaseView(),
 
         init(toolbar, false)
 
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.hillfortListBottomNav)
+        bottomNavigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
+
         presenter = initPresenter(HillfortListPresenter(this)) as HillfortListPresenter
 
+        ft = supportFragmentManager.beginTransaction()
+        val fragment = AllHillfortsFragment.newInstance()
+        ft.replace(R.id.container, fragment)
+        ft.commit()
+        /*
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         presenter.loadHillforts()
+        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,12 +59,28 @@ class HillfortListView: BaseView(),
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        presenter.loadHillforts()
+        //presenter.loadHillforts()
         super.onActivityResult(requestCode, resultCode, data)
     }
 
+    /*
     override fun showHillforts(hillforts: List<HillfortModel>) {
         recyclerView.adapter = HillfortAdapter(hillforts, this)
         recyclerView.adapter?.notifyDataSetChanged()
+    }
+    */
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_all -> {
+                presenter.navigatTo(AllHillfortsFragment.newInstance())
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_favourite -> {
+                presenter.navigatTo(FavouriteHillfortsFragment.newInstance())
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
     }
 }

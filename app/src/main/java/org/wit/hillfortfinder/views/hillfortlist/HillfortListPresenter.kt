@@ -1,6 +1,9 @@
 package org.wit.hillfortfinder.views.hillfortlist
 
+import androidx.fragment.app.Fragment
+import kotlinx.android.synthetic.main.activity_hillfort_list.*
 import org.jetbrains.anko.*
+import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.views.map.HillfortMapsView
 import org.wit.hillfortfinder.views.settings.SettingsView
 import org.wit.hillfortfinder.main.MainApp
@@ -35,5 +38,12 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view) {
                 view?.showHillforts(hillforts)
             }
         }
+    }
+
+    fun navigatTo(fragment: Fragment) {
+        view?.supportFragmentManager?.beginTransaction()
+            ?.replace(R.id.container, fragment)
+            ?.addToBackStack(null)
+            ?.commit()
     }
 }

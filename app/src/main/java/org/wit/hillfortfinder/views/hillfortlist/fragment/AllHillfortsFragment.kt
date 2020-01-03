@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.views.hillfortlist
+package org.wit.hillfortfinder.views.hillfortlist.fragment
 
 
 import android.content.Intent
@@ -12,7 +12,8 @@ import kotlinx.android.synthetic.main.fragment_all_hillforts.view.*
 
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.models.HillfortModel
-import org.wit.hillfortfinder.views.BaseView
+import org.wit.hillfortfinder.views.hillfortlist.HillfortAdapter
+import org.wit.hillfortfinder.views.hillfortlist.HillfortListener
 
 
 class AllHillfortsFragment : Fragment(), HillfortListener {

@@ -11,8 +11,6 @@ import org.wit.hillfortfinder.views.hillfortlist.HillfortListView
 
 class SignupPresenter(view: BaseView): BasePresenter(view) {
 
-    var user = UserModel()
-
     fun doSignup(email: String, password: String) {
         view?.showProgress()
         app.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->

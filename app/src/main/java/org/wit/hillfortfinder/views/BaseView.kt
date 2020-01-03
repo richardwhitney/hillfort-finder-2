@@ -2,11 +2,8 @@ package org.wit.hillfortfinder.views
 
 import android.content.Intent
 import android.os.Parcelable
-import android.view.View
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_signup.*
 import org.jetbrains.anko.AnkoLogger
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.views.editlocation.EditLocationView

@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.views.hillfortlist
+package org.wit.hillfortfinder.views.hillfortlist.fragment
 
 
 import android.os.Bundle

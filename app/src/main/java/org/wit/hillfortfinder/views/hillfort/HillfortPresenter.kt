@@ -50,13 +50,12 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
 
     fun doVisited(visited: Boolean) : String {
         hillfort.visited = visited
-        if (hillfort.visited) {
+        return if (hillfort.visited) {
             val currentDate: Date = Calendar.getInstance().time
             val dateFormat = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-            return dateFormat.format(currentDate)
-        }
-        else {
-            return ""
+            dateFormat.format(currentDate)
+        } else {
+            ""
         }
     }
 
