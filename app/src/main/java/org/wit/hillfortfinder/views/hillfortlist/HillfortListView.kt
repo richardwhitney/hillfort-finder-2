@@ -33,11 +33,6 @@ class HillfortListView: BaseView(),
         val fragment = AllHillfortsFragment.newInstance()
         ft.replace(R.id.container, fragment)
         ft.commit()
-        /*
-        val layoutManager = LinearLayoutManager(this)
-        recyclerView.layoutManager = layoutManager
-        presenter.loadHillforts()
-        */
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -59,28 +54,22 @@ class HillfortListView: BaseView(),
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        //presenter.loadHillforts()
+        supportFragmentManager.fragments.last()?.onActivityResult(requestCode, resultCode, data)
         super.onActivityResult(requestCode, resultCode, data)
     }
-
-    /*
-    override fun showHillforts(hillforts: List<HillfortModel>) {
-        recyclerView.adapter = HillfortAdapter(hillforts, this)
-        recyclerView.adapter?.notifyDataSetChanged()
-    }
-    */
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_all -> {
-                presenter.navigatTo(AllHillfortsFragment.newInstance())
+                presenter.navigateToFrag(AllHillfortsFragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_favourite -> {
-                presenter.navigatTo(FavouriteHillfortsFragment.newInstance())
+                presenter.navigateToFrag(FavouriteHillfortsFragment.newInstance())
                 return@OnNavigationItemSelectedListener true
             }
         }
         false
     }
+
 }

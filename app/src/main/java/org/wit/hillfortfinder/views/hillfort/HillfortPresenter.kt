@@ -59,13 +59,21 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         }
     }
 
+    fun doFavourited(favourited: Boolean) {
+        hillfort.favourited = favourited
+    }
+
     fun doCancel() {
         view?.finish()
     }
 
     fun doDelete() {
-        app.hillforts.delete(hillfort)
-        view?.finish()
+        doAsync {
+            app.hillforts.delete(hillfort)
+            uiThread {
+                view?.finish()
+            }
+        }
     }
 
     fun doSelectImage() {

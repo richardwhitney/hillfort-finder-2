@@ -31,16 +31,7 @@ class HillfortListPresenter(view: BaseView): BasePresenter(view) {
         view?.navigateTo(VIEW.SETTINGS)
     }
 
-    fun loadHillforts() {
-        doAsync {
-            val hillforts = app.hillforts.findByUserId(app.auth.currentUser?.uid!!)
-            uiThread {
-                view?.showHillforts(hillforts)
-            }
-        }
-    }
-
-    fun navigatTo(fragment: Fragment) {
+    fun navigateToFrag(fragment: Fragment) {
         view?.supportFragmentManager?.beginTransaction()
             ?.replace(R.id.container, fragment)
             ?.addToBackStack(null)

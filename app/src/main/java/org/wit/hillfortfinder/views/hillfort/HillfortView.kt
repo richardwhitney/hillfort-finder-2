@@ -30,6 +30,10 @@ class HillfortView : BaseView(), AnkoLogger {
             dateVisited.text = presenter.doVisited(hillfortVisited.isChecked)
         }
 
+        hillfortFavourited.setOnClickListener {
+            presenter.doFavourited(hillfortFavourited.isChecked)
+        }
+
         choseImage.setOnClickListener {
             presenter.doSelectImage()
         }
@@ -41,8 +45,9 @@ class HillfortView : BaseView(), AnkoLogger {
 
     override fun showHillfort(hillfort: HillfortModel) {
         hillfortTitle.setText(hillfort.title)
-        hillfortDiscription.setText(hillfort.title)
+        hillfortDiscription.setText(hillfort.description)
         hillfortVisited.isChecked = hillfort.visited
+        hillfortFavourited.isChecked = hillfort.favourited
         dateVisited.text = hillfort.dateVisited
         additionalNotes.setText(hillfort.additionalNotes)
         ratingBar.rating = hillfort.rating

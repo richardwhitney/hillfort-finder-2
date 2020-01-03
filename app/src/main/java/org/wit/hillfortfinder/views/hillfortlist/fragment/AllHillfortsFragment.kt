@@ -45,7 +45,6 @@ class AllHillfortsFragment : Fragment(), HillfortListener {
     super.onActivityResult(requestCode, resultCode, data)
   }
 
-
   fun showHillforts(hillforts: List<HillfortModel>) {
     root.recyclerViewAll.adapter = HillfortAdapter(hillforts, this)
     root.recyclerViewAll.adapter?.notifyDataSetChanged()
