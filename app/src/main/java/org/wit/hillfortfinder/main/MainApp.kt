@@ -5,6 +5,7 @@ import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.hillfortfinder.models.*
+import org.wit.hillfortfinder.models.firebase.HillfortFireStore
 import org.wit.hillfortfinder.models.json.UserJSONStore
 import org.wit.hillfortfinder.room.HillfortStoreRoom
 
@@ -17,8 +18,8 @@ class MainApp: Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        hillforts = HillfortStoreRoom(applicationContext)
-        users = UserJSONStore(applicationContext)
+        hillforts = HillfortFireStore(applicationContext)
+        //users = UserJSONStore(applicationContext)
         auth = FirebaseAuth.getInstance()
         info("Hillfort Finder started")
     }

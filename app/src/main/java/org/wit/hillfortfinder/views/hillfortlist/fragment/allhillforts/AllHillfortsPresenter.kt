@@ -22,7 +22,7 @@ class AllHillfortsPresenter (val view: AllHillfortsFragment) {
 
   fun loadHillforts() {
     doAsync {
-      val hillforts = app.hillforts.findByUserId(app.auth.currentUser?.uid!!)
+      val hillforts = app.hillforts.findAll()
       uiThread {
         view.showHillforts(hillforts)
       }

@@ -22,7 +22,7 @@ class FavouriteHillfortsPresenter (val view: FavouriteHillfortsFragment) {
 
   fun loadHillforts() {
     doAsync {
-      val hillforts = app.hillforts.findByUserId(app.auth.currentUser?.uid!!).filter { p ->
+      val hillforts = app.hillforts.findAll().filter { p ->
         p.favourited
       }
       println("Num of fav hillforts ${hillforts.size}")

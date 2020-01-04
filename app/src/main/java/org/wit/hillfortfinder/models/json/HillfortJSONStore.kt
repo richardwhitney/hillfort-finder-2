@@ -83,6 +83,10 @@ class HillfortJSONStore: HillfortStore, AnkoLogger {
         hillforts = Gson().fromJson(jsonString, listType)
     }
 
+    override fun clear() {
+        hillforts.clear()
+    }
+
     fun logAll() {
         hillforts.forEach { info("$it") }
     }

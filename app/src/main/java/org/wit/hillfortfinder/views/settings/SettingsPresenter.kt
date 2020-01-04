@@ -48,6 +48,7 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
 
     fun doLogout() {
         app.auth.signOut()
+        app.hillforts.clear()
         val intent = Intent(view, LoginView::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         view?.startActivity(intent)
@@ -55,11 +56,11 @@ class SettingsPresenter(view: BaseView): BasePresenter(view) {
     }
 
     private fun getTotalHillforts(): Int {
-        return app.hillforts.findByUserId(app.auth.currentUser?.uid!!).size
+        return app.hillforts.findAll().size
     }
 
     private fun getTotalHillfortsVisited(): Int {
-        var totalHillforts: List<HillfortModel> = app.hillforts.findByUserId(app.auth.currentUser?.uid!!)
+        var totalHillforts: List<HillfortModel> = app.hillforts.findAll()
         return totalHillforts.filter { p -> p.visited }.size
     }
 }
