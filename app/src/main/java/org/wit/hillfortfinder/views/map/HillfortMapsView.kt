@@ -1,6 +1,7 @@
 package org.wit.hillfortfinder.views.map
 
 import android.os.Bundle
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import org.wit.hillfortfinder.R
@@ -65,7 +66,7 @@ class HillfortMapsView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun showHillfort(hillfort: HillfortModel) {
         currentTitle.text = hillfort.title
         currentDescription.text = hillfort.description
-        currentImage.setImageBitmap(readImageFromPath(this, hillfort.image))
+        Glide.with(this).load(hillfort.image).into(currentImage)
     }
 
     override fun showHillforts(hillforts: List<HillfortModel>) {
