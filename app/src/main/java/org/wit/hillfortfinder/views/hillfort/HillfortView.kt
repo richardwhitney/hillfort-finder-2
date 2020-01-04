@@ -1,10 +1,10 @@
 package org.wit.hillfortfinder.views.hillfort
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_hillfort.*
 import kotlinx.android.synthetic.main.activity_hillfort.hillfortTitle
 import org.jetbrains.anko.*
@@ -16,6 +16,7 @@ import org.wit.hillfortfinder.views.BaseView
 class HillfortView : BaseView(), AnkoLogger {
 
     lateinit var presenter: HillfortPresenter
+    lateinit var map: GoogleMap
     var hillfort = HillfortModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,12 @@ class HillfortView : BaseView(), AnkoLogger {
         super.init(toolbarAdd, true)
 
         presenter = initPresenter(HillfortPresenter(this)) as HillfortPresenter
+
+        mapViewHillfort.onCreate(savedInstanceState)
+        mapViewHillfort.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+        }
 
         hillfortVisited.setOnClickListener {
             dateVisited.text = presenter.doVisited(hillfortVisited.isChecked)
@@ -89,4 +96,28 @@ class HillfortView : BaseView(), AnkoLogger {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mapViewHillfort.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        mapViewHillfort.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mapViewHillfort.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mapViewHillfort.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        mapViewHillfort.onSaveInstanceState(outState)
+    }
 }

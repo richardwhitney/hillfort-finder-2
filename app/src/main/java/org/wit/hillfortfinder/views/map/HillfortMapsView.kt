@@ -1,7 +1,6 @@
 package org.wit.hillfortfinder.views.map
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import org.wit.hillfortfinder.R

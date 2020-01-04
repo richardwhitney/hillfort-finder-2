@@ -99,7 +99,7 @@
                 android:id="@+id/ratingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:numStars="5"
                 app:layout_constraintEnd_toStartOf="@+id/guideline"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,8 +109,8 @@
                 android:id="@+id/additionalNotes"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
                 android:hint="@string/hint_additional_notes"
@@ -118,9 +118,9 @@
                 android:inputType="textMultiLine"
                 android:maxLength="250"
                 android:maxLines="10"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/guideline"
-                app:layout_constraintTop_toBottomOf="@+id/hillfortImage" />
+                app:layout_constraintEnd_toStartOf="@+id/guideline"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
             <Button
                 android:id="@+id/choseImage"
@@ -140,11 +140,13 @@
             <ImageView
                 android:id="@+id/hillfortImage"
                 android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="64dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
                 android:contentDescription="TODO"
+                app:layout_constraintBottom_toTopOf="@+id/guideline3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
@@ -154,7 +156,7 @@
             <Button
                 android:id="@+id/hillfortLocation"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="47dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
@@ -179,6 +181,26 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.25" />
+
+            <com.google.android.gms.maps.MapView
+                android:id="@+id/mapViewHillfort"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/guideline"
+                app:layout_constraintTop_toBottomOf="@+id/hillfortImage" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.55" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </RelativeLayout>
