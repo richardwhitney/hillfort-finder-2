@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.views.hillfortlist.fragment
+package org.wit.hillfortfinder.views.hillfortlist.fragment.allhillforts
 
 
 import android.content.Intent
@@ -8,16 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.fragment_favourite_hillforts.view.*
+import kotlinx.android.synthetic.main.fragment_all_hillforts.view.*
 
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.views.hillfortlist.HillfortAdapter
 import org.wit.hillfortfinder.views.hillfortlist.HillfortListener
 
-class FavouriteHillfortsFragment : Fragment(), HillfortListener {
 
-  lateinit var presenter: FavouriteHillfortsPresenter
+class AllHillfortsFragment : Fragment(), HillfortListener {
+
+  lateinit var presenter: AllHillfortsPresenter
   lateinit var root: View
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,10 +28,10 @@ class FavouriteHillfortsFragment : Fragment(), HillfortListener {
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                             savedInstanceState: Bundle?): View? {
     // Inflate the layout for this fragment
-    root = inflater.inflate(R.layout.fragment_favourite_hillforts, container, false)
-    root.recyclerViewFavourite.layoutManager = LinearLayoutManager(activity)
+    root = inflater.inflate(R.layout.fragment_all_hillforts, container, false)
+    root.recyclerViewAll.layoutManager = LinearLayoutManager(activity)
 
-    presenter = FavouriteHillfortsPresenter(this)
+    presenter = AllHillfortsPresenter(this)
     presenter.loadHillforts()
     return root
   }
@@ -45,14 +46,14 @@ class FavouriteHillfortsFragment : Fragment(), HillfortListener {
   }
 
   fun showHillforts(hillforts: List<HillfortModel>) {
-    root.recyclerViewFavourite.adapter = HillfortAdapter(hillforts, this)
-    root.recyclerViewFavourite.adapter?.notifyDataSetChanged()
+    root.recyclerViewAll.adapter = HillfortAdapter(hillforts, this)
+    root.recyclerViewAll.adapter?.notifyDataSetChanged()
   }
 
   companion object {
     @JvmStatic
     fun newInstance() =
-        FavouriteHillfortsFragment().apply {
+        AllHillfortsFragment().apply {
           arguments = Bundle().apply {}
         }
   }

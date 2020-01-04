@@ -1,4 +1,4 @@
-package org.wit.hillfortfinder.views.hillfortlist.fragment
+package org.wit.hillfortfinder.views.hillfortlist.fragment.allhillforts
 
 import android.content.Intent
 import org.jetbrains.anko.doAsync
@@ -7,7 +7,7 @@ import org.wit.hillfortfinder.main.MainApp
 import org.wit.hillfortfinder.models.HillfortModel
 import org.wit.hillfortfinder.views.hillfort.HillfortView
 
-class FavouriteHillfortsPresenter (val view: FavouriteHillfortsFragment) {
+class AllHillfortsPresenter (val view: AllHillfortsFragment) {
 
   var app: MainApp
 
@@ -22,10 +22,7 @@ class FavouriteHillfortsPresenter (val view: FavouriteHillfortsFragment) {
 
   fun loadHillforts() {
     doAsync {
-      val hillforts = app.hillforts.findByUserId(app.auth.currentUser?.uid!!).filter { p ->
-        p.favourited
-      }
-      println("Num of fav hillforts ${hillforts.size}")
+      val hillforts = app.hillforts.findByUserId(app.auth.currentUser?.uid!!)
       uiThread {
         view.showHillforts(hillforts)
       }
