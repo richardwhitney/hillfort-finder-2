@@ -70,7 +70,7 @@ class HillfortFireStore(val context: Context): HillfortStore, AnkoLogger {
     userId = FirebaseAuth.getInstance().currentUser!!.uid
     db = FirebaseDatabase.getInstance().reference
     hillforts.clear()
-    db.child("users").child(userId).child("placemarks").addListenerForSingleValueEvent(valueEventListener)
+    db.child("users").child(userId).child("hillforts").addListenerForSingleValueEvent(valueEventListener)
   }
 
 }
