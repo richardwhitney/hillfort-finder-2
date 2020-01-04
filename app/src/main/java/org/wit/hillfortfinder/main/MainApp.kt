@@ -16,13 +16,13 @@ class MainApp: Application(), AnkoLogger {
     lateinit var hillforts: HillfortStore
     lateinit var users: UserStore
     var currentUser: UserModel? = null
-    lateinit var auth: FirebaseAuth
+    //lateinit var auth: FirebaseAuth
 
     override fun onCreate() {
         super.onCreate()
         hillforts = HillfortFireStore(applicationContext)
         //users = UserJSONStore(applicationContext)
-        auth = FirebaseAuth.getInstance()
+        //auth = FirebaseAuth.getInstance()
         info("Hillfort Finder started")
     }
 }

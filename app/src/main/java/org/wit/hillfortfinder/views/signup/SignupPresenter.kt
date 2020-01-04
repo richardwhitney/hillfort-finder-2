@@ -24,8 +24,9 @@ class SignupPresenter(view: BaseView): BasePresenter(view) {
 
     fun doSignup(email: String, password: String) {
         view?.showProgress()
-        app.auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
+                fireStore?.userId = auth.currentUser!!.uid
                 view?.hideProgress()
                 view?.navigateTo(VIEW.LIST)
             }

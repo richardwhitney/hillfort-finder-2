@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.wit.hillfortfinder.helpers.checkLocationPermissions
@@ -51,7 +52,7 @@ class HillfortPresenter(view: BaseView): BasePresenter(view) {
         hillfort.additionalNotes = additionalNotes
         hillfort.dateVisited = dateVisited
         hillfort.rating = rating
-        hillfort.userId = app.auth.currentUser?.uid!!
+        hillfort.userId = FirebaseAuth.getInstance().currentUser?.uid!!
         doAsync {
             if (edit) {
                 app.hillforts.update(hillfort)

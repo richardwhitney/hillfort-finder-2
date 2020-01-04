@@ -3,6 +3,7 @@ package org.wit.hillfortfinder.views.settings
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_settings.*
 import org.jetbrains.anko.*
@@ -52,5 +53,13 @@ class SettingsView: BaseView(), AnkoLogger {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showProgress() {
+        progressBarSettings.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        progressBarSettings.visibility = View.GONE
     }
 }

@@ -24,7 +24,7 @@ class LoginPresenter(view: BaseView): BasePresenter(view) {
 
     fun doLogin(email: String, password: String) {
         view?.showProgress()
-        app.auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
                 if (fireStore != null) {
                     fireStore!!.fetchHillforts {
