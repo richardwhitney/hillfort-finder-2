@@ -11,6 +11,7 @@ import org.jetbrains.anko.*
 import org.wit.hillfortfinder.R
 import org.wit.hillfortfinder.helpers.readImageFromPath
 import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.models.Location
 import org.wit.hillfortfinder.views.BaseView
 
 class HillfortView : BaseView(), AnkoLogger {

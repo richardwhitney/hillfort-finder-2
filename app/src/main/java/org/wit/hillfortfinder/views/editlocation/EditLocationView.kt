@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import kotlinx.android.synthetic.main.activity_edit_location.*
 import org.wit.hillfortfinder.R
+import org.wit.hillfortfinder.models.Location
 import org.wit.hillfortfinder.views.BaseView
 
 class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.OnMarkerClickListener {
@@ -56,18 +57,14 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener, GoogleMap.O
         presenter.doUpdateLocation(marker.position.latitude, marker.position.longitude, map.cameraPosition.zoom)
     }
 
-    override fun onBackPressed() {
-        presenter.doSave()
-    }
-
     override fun onMarkerClick(marker: Marker): Boolean {
         presenter.doUpdateMarker(marker)
         return false
     }
 
-    override fun showLocation(latitude: Double, longitude: Double) {
-        lat.text = "%.6f".format(latitude)
-        lng.text = "%.6f".format(longitude)
+    override fun showLocation(location: Location) {
+        lat.text = "%.6f".format(location.lat)
+        lng.text = "%.6f".format(location.lng)
     }
 
     override fun onDestroy() {
