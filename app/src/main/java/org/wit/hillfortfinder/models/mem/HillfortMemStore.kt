@@ -1,35 +1,20 @@
-package org.wit.hillfortfinder.models
+package org.wit.hillfortfinder.models.mem
 
-import android.content.Context
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
-import org.wit.hillfortfinder.helpers.exists
-import org.wit.hillfortfinder.helpers.read
-import org.wit.hillfortfinder.helpers.write
-import java.util.*
+import org.wit.hillfortfinder.models.HillfortModel
+import org.wit.hillfortfinder.models.HillfortStore
 
-val JSON_FILE = "hillforts.json"
-val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
-val listType = object : TypeToken<java.util.ArrayList<HillfortModel>>() {}.type
+//TODO( "use uuid instead")
+var lastId = 0L
 
-fun generateRandomId(): Long {
-    return Random().nextLong()
+internal fun getId(): Long {
+    return lastId++
 }
 
-class HillfortJSONStore: HillfortStore, AnkoLogger {
+class HillfortMemStore: HillfortStore, AnkoLogger {
 
-    val context: Context
-    var hillforts = mutableListOf<HillfortModel>()
-
-    constructor(context: Context) {
-        this.context = context
-        if (exists(context, JSON_FILE)) {
-            deserialize()
-        }
-    }
+    val hillforts = ArrayList<HillfortModel>()
 
     override fun findAll(): List<HillfortModel> {
         return hillforts
@@ -45,9 +30,9 @@ class HillfortJSONStore: HillfortStore, AnkoLogger {
     }
 
     override fun create(hillfort: HillfortModel) {
-        hillfort.id = generateRandomId()
+        hillfort.id = getId()
         hillforts.add(hillfort)
-        serialize()
+        logAll()
     }
 
     override fun update(hillfort: HillfortModel) {
@@ -63,24 +48,12 @@ class HillfortJSONStore: HillfortStore, AnkoLogger {
             foundHillfort.lat = hillfort.lat
             foundHillfort.lng = hillfort.lng
             foundHillfort.zoom = hillfort.zoom
-            serialize()
             logAll()
         }
     }
 
     override fun delete(hillfort: HillfortModel) {
         hillforts.remove(hillfort)
-        serialize()
-    }
-
-    private fun serialize() {
-        val jsonString = gsonBuilder.toJson(hillforts, listType)
-        write(context, JSON_FILE, jsonString)
-    }
-
-    private fun deserialize() {
-        val jsonString = read(context, JSON_FILE)
-        hillforts = Gson().fromJson(jsonString, listType)
     }
 
     fun logAll() {

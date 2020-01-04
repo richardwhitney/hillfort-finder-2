@@ -1,5 +1,5 @@
 
-package org.wit.hillfortfinder.models
+package org.wit.hillfortfinder.models.json
 
 import android.content.Context
 import com.google.gson.Gson
@@ -10,6 +10,8 @@ import org.jetbrains.anko.info
 import org.wit.hillfortfinder.helpers.exists
 import org.wit.hillfortfinder.helpers.read
 import org.wit.hillfortfinder.helpers.write
+import org.wit.hillfortfinder.models.UserModel
+import org.wit.hillfortfinder.models.UserStore
 
 
 val UJSON_FILE = "users.json"
