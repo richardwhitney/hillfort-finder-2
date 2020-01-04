@@ -108,12 +108,12 @@
                     android:layout_height="47dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginEnd="32dp"
+                    android:layout_marginEnd="16dp"
                     android:background="@color/colorAccent"
                     android:text="@string/button_addImage"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/hillfortDiscription" />
 
@@ -127,23 +127,8 @@
                     android:contentDescription="TODO"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/hillfortLocation"
+                    app:layout_constraintTop_toBottomOf="@+id/choseImage"
                     tools:srcCompat="@mipmap/ic_launcher" />
-
-                <Button
-                    android:id="@+id/hillfortLocation"
-                    android:layout_width="0dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="32dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@color/colorAccent"
-                    android:text="@string/button_location"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/guideline"
-                    app:layout_constraintTop_toBottomOf="@+id/hillfortDiscription" />
 
                 <androidx.constraintlayout.widget.Guideline
                     android:id="@+id/guideline"
