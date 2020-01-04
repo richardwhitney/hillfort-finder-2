@@ -27,5 +27,7 @@ class AllHillfortsPresenter (val view: AllHillfortsFragment) {
         view.showHillforts(hillforts)
       }
     }
+    //val hillforts = app.hillforts.findAll()
+    //view.showHillforts(hillforts)
   }
 }

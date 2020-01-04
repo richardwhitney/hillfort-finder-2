@@ -2,6 +2,8 @@ package org.wit.hillfortfinder.main
 
 import android.app.Application
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
 import org.wit.hillfortfinder.models.*
